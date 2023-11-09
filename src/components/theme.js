@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import variables from "../styles/_variables.scss";
 
 export const surfaces = {
     light: '#A5C9CA',
@@ -9,9 +10,10 @@ export const surfaces = {
 const theme = createTheme({
     palette: {
         primary: {
-            light: surfaces['medium'],
-            main: surfaces['dark'],
-            dark: surfaces['black'],
+            light: variables.primaryMedium,
+            main: variables.primaryDark,
+            dark: variables.black,
+            contrastText: variables.white
         },
         secondary: {
             main: '#EAC333',

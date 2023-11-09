@@ -1,0 +1,28 @@
+// Colors
+$black: #000000;
+$white: #FFFFFF;
+
+// Surfaces
+$primaryLight: #A5C9CA;
+$primaryMedium: #395B64;
+$primaryDark: #2C3333;
+
+// Secondary
+$secondaryLight: $white;
+$secondaryMedium: #EAC333;
+$secondaryDark: #E6B609;
+
+// Text
+
+
+:export {
+    white: $white;
+    black: $black;
+    primaryLight: $primaryLight;
+    primaryMedium: $primaryMedium;
+    primaryDark: $primaryDark;
+    primaryText: $white;
+    secondaryLight: $secondaryLight;
+    secondaryMedium: $secondaryMedium;
+    secondaryDark: $secondaryDark;
+}

@@ -3,13 +3,12 @@ import {
     Box, 
     Stack, 
 } from "@mui/material";
-import { surfaces } from "./theme";
 import NavHeader from "./NavHeader";
 
 export default function Layout() {
 
     return(
-        <Box container sx={{ height: '100vh', backgroundColor: surfaces['black']}}>
+        <Box sx={{ height: '100vh', backgroundColor: "black" }}>
             <Stack>
                 <NavHeader />
             </Stack>
