@@ -14,30 +14,32 @@ import {
     Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme  } from '@mui/material/styles';
 
 const title = "Seismic Dashboard";
 const navItems = ["Home", "Maps", "Charts", "Resources", "About"];
 
 export default function NavHeader () {
 
-    const theme = useTheme();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setDrawerOpen((prevState) => !prevState);
     };
 
+    const handleListItemClick = (event, index) => {
+        console.log(`You clicked on ${navItems[index]}`);
+    }
+
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ my: 2 }}>
+          <Typography variant="h6" sx={{ py: 2 }}>
             MENU
           </Typography>
           <Divider />
           <List>
             {navItems.map((item) => (
               <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemButton onClick={handleListItemClick} sx={{ textAlign: 'center' }}>
                   <ListItemText primary={item} />
                 </ListItemButton>
               </ListItem>
@@ -83,8 +85,8 @@ export default function NavHeader () {
                         '& .MuiDrawer-paper': { 
                             boxSizing: 'border-box', 
                             width: 240, 
-                            backgroundColor: theme.palette.primary.main, 
-                            color: theme.palette.primary.contrastText
+                            backgroundColor: "primary.light", 
+                            color: "primary.contrastText"
                         },
                     }}
                 >
