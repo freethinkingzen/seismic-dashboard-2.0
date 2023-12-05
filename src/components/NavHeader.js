@@ -50,7 +50,7 @@ export default function NavHeader () {
 
     return (
         <Box sx={{ height: '4em', flexGrow: 1 }}>
-            <AppBar color="primary">
+            <AppBar color="primary" position='sticky'>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -85,7 +85,7 @@ export default function NavHeader () {
                         '& .MuiDrawer-paper': { 
                             boxSizing: 'border-box', 
                             width: 240, 
-                            backgroundColor: "primary.light", 
+                            backgroundColor: "primary.main", 
                             color: "primary.contrastText"
                         },
                     }}

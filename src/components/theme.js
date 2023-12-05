@@ -1,12 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import variables from "../styles/_variables.scss";
 
-export const surfaces = {
-    light: '#A5C9CA',
-    medium: '#395B64',
-    dark: '#2C3333',
-    black: '#000000'
-}
 const theme = createTheme({
     palette: {
         primary: {
@@ -16,8 +10,21 @@ const theme = createTheme({
             contrastText: variables.white
         },
         secondary: {
-            main: '#EAC333',
-            dark: '#E6B609',
+            main: variables.secondaryMedium,
+            dark: variables.secondaryDark
+        },
+        warning: {
+            light: variables.warningLight,
+            main: variables.warningMedium,
+            dark: variables.warningDark
+        },
+        info: {
+            light: variables.infoLight,
+            main: variables.infoMedium,
+            dark: variables.infoDark
+        },
+        error: {
+            main: variables.errorMedium
         }
     },
 });

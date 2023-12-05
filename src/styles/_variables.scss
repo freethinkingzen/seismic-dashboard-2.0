@@ -12,12 +12,26 @@ $secondaryLight: $white;
 $secondaryMedium: #EAC333;
 $secondaryDark: #E6B609;
 
-// Text
+// Info
+$infoLight: #56B4E9;
+$infoMedium: #0072B2;
+$infoDark: #00304c;
+
+// Warning
+$warningLight: #F0E442;
+$warningMedium: #E69F00;
+$warningDark: #E46500;
+
+// Error
+$errorMedium: #C72A44;
+
+$purple: #AC2AC7;
 
 
 :export {
     white: $white;
     black: $black;
+    purple: $purple;
     primaryLight: $primaryLight;
     primaryMedium: $primaryMedium;
     primaryDark: $primaryDark;
@@ -25,4 +39,11 @@ $secondaryDark: #E6B609;
     secondaryLight: $secondaryLight;
     secondaryMedium: $secondaryMedium;
     secondaryDark: $secondaryDark;
+    warningLight: $warningLight;
+    warningDark: $warningDark;
+    warningMedium: $warningMedium;
+    infoLight: $infoLight;
+    infoMedium: $infoMedium;
+    infoDark: $infoDark;
+    errorMedium: $errorMedium;
 }
