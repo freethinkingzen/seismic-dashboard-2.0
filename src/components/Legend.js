@@ -1,44 +1,31 @@
-import { useEffect } from "react";
-import L from "leaflet";
-import { useMap } from "react-leaflet";
+import React from 'react';
 import variables from "../styles/_variables.scss";
+import { Grid, Typography } from "@mui/material";
 
 export default function Legend() {
-    const map = useMap();
   
-    useEffect(() => {
-        if (map) {
-            const legend = L.control({ position: "bottomright" });
-
-            legend.onAdd = () => {
-                const div = L.DomUtil.create("div", "legend");
-                div.innerHTML = `
-                    <div>
-                        <span class="legendBox" style="background-color: ${variables.warningLight}; height: '2em'; width: '2em';"></span>
-                        <span class="legendText">0 - 2</b></span>
-                    </div>
-                    <div>
-                        <span class="legendBox" style="background-color: ${variables.warningMedium};"></span>
-                        <span class="legendText">2 - 4</span>
-                    </div>
-                    <div>
-                        <span class="legendBox" style="background-color: ${variables.warningDark};"></span>
-                        <span class="legendText">4 - 6</span>
-                    </div>
-                    <div>
-                        <span class="legendBox" style="background-color: ${variables.errorMedium};"></span>
-                        <span class="legendText">6 - 8</span>
-                    </div>
-                    <div>
-                        <span class="legendBox" style="background-color: ${variables.purple};"></span>
-                        <span class="legendText">8+</span>
-                    </div>
-                `;
-                return div;
-            };
-
-            legend.addTo(map);
-        }
-    }, [map]);
-  return null;
+    return(
+        <Grid container sx={{ marginTop: "8px" }}>
+            <Grid container item justifyContent="center" alignContent="center" xs={12} className="legend">
+                <Typography variant='h6' sx={{ fontWeight: "bold" }}>Magnitude</Typography>
+            </Grid>
+            <Grid container item xs={12} justifyContent="space-between">
+                <Grid item sx={{ paddingLeft: "1em" }}>
+                    <Typography color={variables.warningLight} variant="button">0</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography color={variables.warningMedium} variant="button">2</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography color={variables.warningDark} variant="button">4</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography color={variables.errorMedium} variant="button">6</Typography>
+                </Grid>
+                <Grid item sx={{ paddingRight: "1em" }}>
+                    <Typography color={variables.purple} variant="button">8+</Typography>
+                </Grid>
+            </Grid>
+        </Grid>
+    )
 }

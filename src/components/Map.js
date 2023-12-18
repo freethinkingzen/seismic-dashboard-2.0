@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import MarkerFactory from "./MarkerFactory";
-import Legend from "./Legend";
 import getData from "../utils/USGSapi";
 
 
@@ -21,7 +20,7 @@ export default function Map() {
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
             />
             <MarkerFactory data={data} />
-            <Legend />
+            
         </MapContainer>
     )
 }

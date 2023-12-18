@@ -1,4 +1,5 @@
 @import "./styles/variables";
+@import "./styles/mixins";
 
 html {
   background-color: $black;
@@ -16,24 +17,14 @@ body {
 
 .leaflet-container {
   height: 50vw;
+
+  @include xs {
+    height: 100vw;
+  }
 }
 
 .legend {
-  color: white;
-  background-color: #000000b3;
-  padding: 1em;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  height: 1.5em;
+  border-radius: 4px;
+  background: linear-gradient(to right, $warningLight 0%, $warningMedium 25%, $warningDark 50%, $errorMedium 75%, $purple 100%);
 }
-
-.legendBox {
-    margin-right: 5px;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-}
-
-.legendText {
-    font-weight: bold;
-}
-
