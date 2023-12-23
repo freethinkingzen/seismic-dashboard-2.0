@@ -1,13 +1,16 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import Layout from './components/Layout';
+import Main from './components/Main';
 import theme from './components/theme';
 import 'leaflet/dist/leaflet.css';
+import { SeismicDataProvider } from './Context';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <SeismicDataProvider>
       <CssBaseline />
-      <Layout />
+      <Main />
+      </SeismicDataProvider>
     </ThemeProvider>
   );
 }

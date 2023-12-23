@@ -29,10 +29,9 @@ export default async function getData(length) {
         default:
             endpoint = endpoints.hour;
     }
-    console.log(baseUrl + endpoint);
+
     try {
         const response = await axios.get(baseUrl + endpoint);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error(error);
