@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import { SeismicDataContext } from '../Context';
 import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
+import LocationDialog from './LocationDialog';
 
 const DataCard = styled(Card)(({ theme }) => ({
     display: "flex",
@@ -28,7 +29,8 @@ const DataCards = () => {
     const [largestMag, setLargestMag] = useState({});
     const [significant, setSignificant] = useState([]);
     const [tsunami, setTsunami] = useState([]);
-    const [selected, setSelected] = useState('');
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState(null);
 
     useEffect(() => {
         if (context.seismicDataToday.length > 0) {
@@ -39,6 +41,15 @@ const DataCards = () => {
             setLoading(false);
         }
     }, [context.seismicDataToday]);
+
+    const handleDialogOpen = () => {
+        setDialogOpen(true);
+    };
+
+    const handleDialogClose = (value) => {
+        setDialogOpen(false);
+        setSelectedLocation(value);
+    };
 
     return (
         <Grid container spacing={1} sx={{ flexGrow: 1, padding: "8px" }}>
@@ -128,7 +139,7 @@ const DataCards = () => {
                                 { tsunami.length }
                             </Typography>
                             {tsunami.length < 1 && 
-                                <Button variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }}>
+                                <Button onClick={handleDialogOpen} variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }}>
                                     Map
                                 </Button>
                             }
@@ -137,7 +148,7 @@ const DataCards = () => {
                     </CardContent>
                 </DataCard>
             </Grid>
-
+            <LocationDialog values={[]} selectedValue={selectedLocation} open={dialogOpen} onClose={handleDialogClose} />
         </Grid>
     );
 };
