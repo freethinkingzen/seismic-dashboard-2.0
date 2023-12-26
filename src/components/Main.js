@@ -17,6 +17,7 @@ export default function Main() {
         getData("day").then((res) => {
             context.updateSeismicDataToday(res.features);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return(
