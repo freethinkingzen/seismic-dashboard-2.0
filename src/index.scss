@@ -22,9 +22,3 @@ body {
     height: 80vh;
   }
 }
-
-.legend {
-  height: 1.5em;
-  border-radius: 4px;
-  background: linear-gradient(to right, $warningLight 0%, $warningMedium 25%, $warningDark 50%, $errorMedium 75%, $purple 100%);
-}

@@ -33,7 +33,7 @@ export const SeismicDataProvider = ({ children }) => {
   // Value object to be provided by the context
   const value = {
     seismicDataHour,
-    setSeismicDataHour,
+    updateSeismicDataHour,
     seismicDataToday,
     updateSeismicDataToday,
     seismicDataWeek,

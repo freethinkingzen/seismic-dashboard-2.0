@@ -1,14 +1,24 @@
 import React from 'react';
 import variables from "../styles/_variables.scss";
 import { Grid, Typography } from "@mui/material";
+import styled from '@emotion/styled';
+
+const LegendGradient = styled(Grid)(() => ({
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    height: "2em",
+    borderRadius: "4px",
+    background: `linear-gradient(to right, ${variables.warningLight} 0%, ${variables.warningMedium} 25%, ${variables.warningDark} 50%, ${variables.errorMedium} 75%, ${variables.purple} 100%)`,
+
+}));
 
 export default function Legend() {
-  
     return(
         <Grid container sx={{ marginTop: "8px" }}>
-            <Grid container item justifyContent="center" alignContent="center" xs={12} className="legend">
+            <LegendGradient item xs={12}>
                 <Typography variant='h6' sx={{ fontWeight: "bold" }}>Magnitude</Typography>
-            </Grid>
+            </LegendGradient>
             <Grid container item xs={12} justifyContent="space-between">
                 <Grid item sx={{ paddingLeft: "1em" }}>
                     <Typography color={variables.warningLight} variant="button">0</Typography>

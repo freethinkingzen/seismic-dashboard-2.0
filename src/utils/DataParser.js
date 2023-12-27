@@ -1,3 +1,5 @@
+import variables from '../styles/_variables.scss';
+
 const USGS_SIGNIFICANT_DEFINITION = 600;
 
 export const totalQuakes = (data) => {
@@ -35,4 +37,18 @@ export const tsunamiPotential = (data) => {
         }
     });
     return potential;
+}
+
+export const colorSelector = (mag) => {
+    if (mag < 2) {
+      return variables.warningLight;
+    } else if (mag < 4) {
+      return variables.warningMedium;
+    } else if (mag < 6) {
+      return variables.warningDark;
+    } else if (mag < 8) {
+      return variables.errorMedium;
+    } else {
+      return variables.purple;
+    }
 }

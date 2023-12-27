@@ -5,9 +5,10 @@ import {
     CardContent, 
     Divider, 
     Grid, 
-    Skeleton, 
+    Skeleton,
+    styled, 
+    Tooltip, 
     Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import { SeismicDataContext } from '../Context';
 import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
@@ -52,100 +53,107 @@ const DataCards = () => {
     };
 
     return (
-        <Grid container spacing={1} sx={{ flexGrow: 1, padding: "8px" }}>
+        <Grid container spacing={1} sx={{ flexGrow: 1, justifyContent: "center" }}>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={2}>
                 <Typography variant="h5" color={"primary.contrastText"} sx={{ textAlign: "center" }}>
                     Today at a Glance
                 </Typography>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={12}>
+            <Grid item xs={3} lg={2}>
                 <DataCard>
                     <CardContent>
-                        <Typography variant="body1" color="primary.contrastText">
-                            Total Events
-                        </Typography>
-                        <Divider sx={{ backgroundColor: "primary.contrastText" }}/>
-                        <Typography variant="h5" color="primary.contrastText" my={{ xs: "1.5em", sm: 0 }}>
-                            {loading 
-                                ? <Skeleton sx={{ backgroundColor: "primary.light" }}/> 
-                                : totalQuakes}
-                        </Typography>
-                    </CardContent>
-                </DataCard>
-            </Grid>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Total Events
+                            </Typography>
 
-            <Grid item xs={6} sm={3} md={12}>
-                <DataCard>
-                    <CardContent>
-                        <Typography variant="body1" component="h3" color="primary.contrastText">
-                            Largest Magnitude
-                        </Typography>
-                        <Divider sx={{ backgroundColor: "primary.contrastText" }}/>
-                        {loading 
-                            ? <Skeleton sx={{ height: "8em", backgroundColor: "primary.light" }}/>
-                            : <>
                             <Typography variant="h5" color="primary.contrastText">
-                                { largestMag.properties.mag }
+                                {loading 
+                                    ? <Skeleton sx={{ backgroundColor: "primary.light" }}/> 
+                                    : totalQuakes}
                             </Typography>
-                            <Typography variant="caption" color="primary.contrastText" display={"flex"}>
-                                { largestMag.properties.place }
-                            </Typography>
-                            <Button variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }} >
-                                Map
-                            </Button>
-                            </>
-                        }
                     </CardContent>
                 </DataCard>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={12}>
+            <Grid item xs={3} lg={2}>
                 <DataCard>
-                    <CardContent>
-                        <Typography variant="body1" color="primary.contrastText">
-                            Potential Damage
-                        </Typography>
-                        <Divider sx={{ backgroundColor: "primary.contrastText" }}/>
-                        {loading 
-                            ? <Skeleton sx={{ height: "5em", backgroundColor: "primary.light" }}/>
+                    <Grid container padding={1}>
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="body2" component="h3" color="primary.contrastText">
+                                Largest Magnitude
+                            </Typography>
+                            <Tooltip title={ largestMag?.properties?.place } placement="bottom">
+                                    <Typography variant="h5" color="primary.contrastText">
+                                    {loading
+                                        ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
+                                        : largestMag.properties.mag
+                                    }
+                                    </Typography>
+                            </Tooltip>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Button disabled={loading} variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }} >
+                                    Map
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </DataCard>
+            </Grid>
+
+            <Grid item xs={3} lg={2}>
+                <DataCard>
+                    <Grid container p={1}>
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Potential Damage
+                            </Typography>
+                            {loading 
+                            ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
                             : <>
                             <Typography variant="h5" color="primary.contrastText">
                                 { significant.length }
                             </Typography>
-                            {tsunami < 1 && 
-                                <Button variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }} >
-                                    Map
-                                </Button>
-                            }
                         </>
                         }
-                    </CardContent>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                        {significant.length < 1 && 
+                            <Button variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }} >
+                                Map
+                            </Button>
+                        }
+                        </Grid>
+
+                    </Grid>
                 </DataCard>
             </Grid>
 
-            <Grid item xs={6} sm={3} md={12}>
+            <Grid item xs={3} lg={2}>
                 <DataCard>
-                    <CardContent>
-                        <Typography variant="body1" color="primary.contrastText">
-                            Tsunami Potential
-                        </Typography>
-                        <Divider sx={{ backgroundColor: "primary.contrastText" }}/>
-                        {loading 
-                            ? <Skeleton sx={{ height: "5em", backgroundColor: "primary.light" }}/>
-                            : <>
-                            <Typography variant="h5" color="primary.contrastText">
-                                { tsunami.length }
+                    <Grid container p={1}>
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Tsunami Potential
                             </Typography>
-                            {tsunami.length < 1 && 
-                                <Button onClick={handleDialogOpen} variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }}>
-                                    Map
-                                </Button>
-                            }
-                        </>
+                            {loading 
+                            ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
+                            : <>
+                                <Typography variant="h5" color="primary.contrastText">
+                                    { tsunami.length }
+                                </Typography>
+                            </>
                         }
-                    </CardContent>
+                        </Grid>
+                        <Grid item xs={12} md={2}>
+                        {tsunami.length < 1 && 
+                            <Button onClick={handleDialogOpen} variant="outlined" size="small" color='warning' startIcon={ <GpsFixedIcon /> } sx={{ margin: "0.5em" }}>
+                                Map
+                            </Button>
+                        }
+                        </Grid>
+                    </Grid>
                 </DataCard>
             </Grid>
             <LocationDialog values={[]} selectedValue={selectedLocation} open={dialogOpen} onClose={handleDialogClose} />

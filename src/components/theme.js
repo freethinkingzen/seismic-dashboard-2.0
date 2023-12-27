@@ -27,6 +27,11 @@ const theme = createTheme({
             main: variables.errorMedium
         }
     },
+    typography: {
+        fontFamily: [
+            "Arial Black",
+        ].join(','),
+    }
 });
 
 export default theme;
