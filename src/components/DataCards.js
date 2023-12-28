@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
-    Button,
     Card,
     CardActionArea,
     CardContent, 
     Grid, 
     Skeleton,
-    styled, 
-    Tooltip, 
+    styled,
     Typography } from '@mui/material';
 import { SeismicDataContext } from '../Context';
 import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
