@@ -3,7 +3,6 @@ import {
     Button,
     Card,
     CardContent, 
-    Divider, 
     Grid, 
     Skeleton,
     styled, 
@@ -61,7 +60,7 @@ const DataCards = () => {
                 </Typography>
             </Grid>
 
-            <Grid item xs={3} lg={2}>
+            <Grid item xs={6} sm={3} lg={2}>
                 <DataCard>
                     <CardContent>
                             <Typography variant="body2" color="primary.contrastText">
@@ -77,7 +76,7 @@ const DataCards = () => {
                 </DataCard>
             </Grid>
 
-            <Grid item xs={3} lg={2}>
+            <Grid item xs={6} sm={3} lg={2}>
                 <DataCard>
                     <Grid container padding={1}>
                         <Grid item xs={12} md={6}>
@@ -102,7 +101,7 @@ const DataCards = () => {
                 </DataCard>
             </Grid>
 
-            <Grid item xs={3} lg={2}>
+            <Grid item xs={6} sm={3} lg={2}>
                 <DataCard>
                     <Grid container p={1}>
                         <Grid item xs={12} md={6}>
@@ -130,7 +129,7 @@ const DataCards = () => {
                 </DataCard>
             </Grid>
 
-            <Grid item xs={3} lg={2}>
+            <Grid item xs={6} sm={3} lg={2}>
                 <DataCard>
                     <Grid container p={1}>
                         <Grid item xs={12} md={6}>

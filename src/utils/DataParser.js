@@ -3,11 +3,10 @@ import variables from '../styles/_variables.scss';
 const USGS_SIGNIFICANT_DEFINITION = 600;
 
 export const totalQuakes = (data) => {
-  return data.features.length;
+    return data.features.length;
 };
 
 export const largestMagnitude = (data) => {
-    console.log(data);
     let largest = null;
     data.forEach((quake) => {
         if (!largest) {
@@ -41,14 +40,14 @@ export const tsunamiPotential = (data) => {
 
 export const colorSelector = (mag) => {
     if (mag < 2) {
-      return variables.warningLight;
+        return variables.warningLight;
     } else if (mag < 4) {
-      return variables.warningMedium;
+        return variables.warningMedium;
     } else if (mag < 6) {
-      return variables.warningDark;
+        return variables.warningDark;
     } else if (mag < 8) {
-      return variables.errorMedium;
+        return variables.errorMedium;
     } else {
-      return variables.purple;
+        return variables.purple;
     }
 }

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { 
+    BottomNavigation,
     Box,
     Grid,
-    Stack, 
+    Stack,
 } from "@mui/material";
 import NavHeader from "./NavHeader";
 import Map from "./Map";
@@ -32,21 +33,23 @@ export default function Main() {
     }, []);
 
     return(
-        <Box sx={{ flexGrow: 1, height: '100vh', backgroundColor: "primary.dark" }}>
+        <Box sx={{ height: '100vh', backgroundColor: "primary.dark" }}>
             <Stack>
                 <NavHeader />
                 <Grid container p="8px">
                     <Grid item xs={12} sx={{ backgroundColor: "primary.dark" }}>
                         <DataCards />
                     </Grid>
-                    <Grid item xs={0} md={2} sx={{ backgroundColor: "primary.dark" }}>
+                    <Grid item xs={12} md={2} order={{ xs: 2, md: 1 }} sx={{ backgroundColor: "primary.dark" }}>
                         <Feed />
                     </Grid>
-                    <Grid item xs={12} md={10} lg={8} sx={{ padding: "8px" }}>
+                    <Grid item xs={12} md={10} lg={8} order={{ xs: 1, md: 2}} sx={{ padding: "8px" }}>
                         <Legend />
                         <Map />
                     </Grid>
                 </Grid>
+                <BottomNavigation sx={{ backgroundColor: "primary.main" }}>
+                    </BottomNavigation>
             </Stack>
         </Box>
     )
