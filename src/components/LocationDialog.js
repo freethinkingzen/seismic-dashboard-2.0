@@ -18,11 +18,11 @@ function LocationDialog({ values, selectedValue, open, onClose }) {
         <List>
           {values.map((location) => (
             <ListItemButton
-              key={location.id}
+              key={location?.id}
               selected={selectedValue === location}
               onClick={() => handleLocationClick(location)}
             >
-              <ListItemText primary={location.name} />
+              <ListItemText primary={location?.properties?.place} />
             </ListItemButton>
           ))}
         </List>

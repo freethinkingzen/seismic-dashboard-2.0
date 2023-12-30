@@ -1,5 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { CardContent, Divider, Grid, Paper, Skeleton, styled, Typography, useTheme } from '@mui/material';
+import {
+    CardActionArea,
+    CardContent, 
+    Divider,
+    Grid,
+    Paper,
+    Skeleton,
+    styled,
+    Typography,
+    useTheme } from '@mui/material';
 import { SeismicDataContext } from '../Context';
 import getData from '../utils/USGSapi';
 import { colorSelector } from '../utils/DataParser';
@@ -29,19 +38,19 @@ const FeedItem = ({ properties }) => {
     const color = colorSelector(magnitude);
 
   return (
-    <FeedItemContainer container justifyContent={{xs: "space-between", sm: "center"}} my="1px" theme={theme}>
-        <Grid item m="0.5em" order={{ xs: 1, sm: 0 }}>
+    <FeedItemContainer item container justifyContent={{xs: "space-between", sm: "center"}} my="1px" theme={theme}>
+        <Grid item xs={2} m="0.5em" order={{ xs: 1, sm: 0 }}>
             <CircleCard elevation={24} sx={{ height: magnitude * 12, width: magnitude * 12, backgroundColor: color }}>
                 <CardContent>
                     <Typography variant="h5" color="black">{magnitude}</Typography>
                 </CardContent>
             </CircleCard>
         </Grid>
-        <Grid item m="0.5em" order={{ xs: 0, sm: 1 }}>
+        <Grid item xs={8} m="0.5em" order={{ xs: 0, sm: 1 }}>
             <Typography variant="body2" color={"primary.contrastText"} >
                 {time}
             </Typography>
-            <Divider sx={{ width: "10em", backgroundColor: "primary.contrastText" }} />
+            <Divider sx={{ maxWidth: "10em", backgroundColor: "primary.contrastText" }} />
             <Typography variant="caption" color={"primary.contrastText"} sx={{ display: "flex" }}>
                 {properties.place}
             </Typography>
@@ -61,7 +70,6 @@ const Feed = () => {
             context.updateSeismicDataHour(res.features);
             setData(res.features);
             setLoading(false);
-            console.log(res.features);
         });
     }
 

@@ -36,6 +36,7 @@ const DataCards = () => {
     const [significant, setSignificant] = useState([]);
     const [tsunami, setTsunami] = useState([]);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogValues, setDialogValues] = useState(null);
     const [selectedLocation, setSelectedLocation] = useState(null);
 
     useEffect(() => {
@@ -48,11 +49,23 @@ const DataCards = () => {
         }
     }, [context.seismicDataToday]);
 
-    const handleDialogOpen = () => {
+    const handleDialogOpen = (id) => {
+        switch (id) {
+            case "significant":
+                setDialogValues(significant);
+                break;
+            case "tsunami":
+                setDialogValues(tsunami);
+                break;
+            default:
+                setDialogValues(null);
+                break;
+        }
         setDialogOpen(true);
     };
 
     const handleDialogClose = (value) => {
+        console.log(value);
         setDialogOpen(false);
         setSelectedLocation(value);
     };
@@ -60,13 +73,13 @@ const DataCards = () => {
     return (
         <Grid container spacing={1} sx={{ height: "100%", justifyContent: "center" }}>
 
-            <Grid item xs={12} sx={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={12} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Typography variant="h5" color={"primary.contrastText"} sx={{ textAlign: "center" }}>
                     Today at a Glance
                 </Typography>
             </Grid>
 
-            <Grid item xs={6} sm={3} lg={12}>
+            <Grid item xs={6} sm={3} lg={12} sx={{ pointerEvents: "none" }}>
                 <DataCard>
                     <CardActionArea>
                     <CardContent>
@@ -86,7 +99,7 @@ const DataCards = () => {
 
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
-                    <CardActionArea onClick={handleDialogOpen}>
+                    <CardActionArea onClick={() => handleDialogOpen("largestMag")}>
                     <CardContent>
                         <Typography variant="body2" color="primary.contrastText">
                             Largest Magnitude
@@ -104,7 +117,7 @@ const DataCards = () => {
 
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
-                    <CardActionArea onClick={handleDialogOpen}>
+                    <CardActionArea onClick={() => handleDialogOpen("significant")}>
                     <CardContent>
                         <Typography variant="body2" color="primary.contrastText">
                             Potential Damage
@@ -124,7 +137,7 @@ const DataCards = () => {
 
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
-                    <CardActionArea onClick={handleDialogOpen}>
+                    <CardActionArea onClick={() => handleDialogOpen("tsunami")} values={tsunami}>
                     <CardContent>
                         <Typography variant="body2" color="primary.contrastText">
                             Tsunami Potential
@@ -141,7 +154,7 @@ const DataCards = () => {
                     </CardActionArea>
                 </DataCard>
             </Grid>
-            <LocationDialog values={[]} selectedValue={selectedLocation} open={dialogOpen} onClose={handleDialogClose} />
+            {dialogValues && <LocationDialog values={dialogValues} selectedValue={selectedLocation} open={dialogOpen} onClose={handleDialogClose} />}
         </Grid>
     );
 };
