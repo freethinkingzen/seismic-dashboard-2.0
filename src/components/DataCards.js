@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
+    Box,
     Card,
     CardActionArea,
-    CardContent, 
-    Grid, 
+    CardContent,
+    Grid,
     Skeleton,
     styled,
-    Typography } from '@mui/material';
+    Typography
+} from '@mui/material';
 import { SeismicDataContext } from '../Context';
 import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
 import LocationDialog from './LocationDialog';
+import { Popup } from 'react-leaflet';
 
 const DataCard = styled(Card)(({ theme }) => ({
     display: "flex",
@@ -28,11 +31,22 @@ const DataCard = styled(Card)(({ theme }) => ({
     },
 }));
 
+const popupHTML = (item) => {
+    console.log(item);
+    return `
+        <span><b>Magnitude ${item.properties.mag}</b></span>
+        <br />
+        <span>${new Date(item.properties.time).toLocaleDateString()}</span>
+        <br />
+        <span>${new Date(item.properties.time).toLocaleTimeString()}</span>
+        <br />
+        <span>${item.properties.place}</span>;`
+}
 const DataCards = () => {
     const context = useContext(SeismicDataContext);
     const [loading, setLoading] = useState(true);
     const [totalQuakes, setTotalQuakes] = useState(0);
-    const [largestMag, setLargestMag] = useState({});
+    const [largestMag, setLargestMag] = useState(null);
     const [significant, setSignificant] = useState([]);
     const [tsunami, setTsunami] = useState([]);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -50,22 +64,33 @@ const DataCards = () => {
     }, [context.seismicDataToday]);
 
     const handleDialogOpen = (id) => {
+        let values;
         switch (id) {
+            case "largestMag":
+                values = [largestMag];
+                break;
             case "significant":
-                setDialogValues(significant);
+                values = significant;
                 break;
             case "tsunami":
-                setDialogValues(tsunami);
+                values = tsunami;
                 break;
             default:
-                setDialogValues(null);
+                values = [];
                 break;
         }
-        setDialogOpen(true);
+        if (values.length === 1) {
+            context.map.flyTo([values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]], 11);
+            context.map.openPopup(popupHTML(values[0]), [values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]]);
+        }
+        else if (values.length > 1) {
+            setDialogValues(values);
+            setDialogOpen(true);
+        }
+        else setDialogValues(null);
     };
 
     const handleDialogClose = (value) => {
-        console.log(value);
         setDialogOpen(false);
         setSelectedLocation(value);
     };
@@ -82,17 +107,17 @@ const DataCards = () => {
             <Grid item xs={6} sm={3} lg={12} sx={{ pointerEvents: "none" }}>
                 <DataCard>
                     <CardActionArea>
-                    <CardContent>
-                        <Typography variant="body2" color="primary.contrastText">
-                            Total Events
-                        </Typography>
-                        <Typography variant="h5" color="primary.contrastText">
-                        {loading
-                            ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
-                            : totalQuakes
-                        }
-                        </Typography>
-                    </CardContent>
+                        <CardContent>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Total Events
+                            </Typography>
+                            <Typography variant="h5" color="primary.contrastText">
+                                {loading
+                                    ? <Skeleton sx={{ backgroundColor: "primary.light" }} />
+                                    : totalQuakes
+                                }
+                            </Typography>
+                        </CardContent>
                     </CardActionArea>
                 </DataCard>
             </Grid>
@@ -100,17 +125,17 @@ const DataCards = () => {
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
                     <CardActionArea onClick={() => handleDialogOpen("largestMag")}>
-                    <CardContent>
-                        <Typography variant="body2" color="primary.contrastText">
-                            Largest Magnitude
-                        </Typography>
-                        <Typography variant="h5" color="primary.contrastText">
-                        {loading
-                            ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
-                            : largestMag.properties.mag
-                        }
-                        </Typography>
-                    </CardContent>
+                        <CardContent>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Largest Magnitude
+                            </Typography>
+                            <Typography variant="h5" color="primary.contrastText">
+                                {loading
+                                    ? <Skeleton sx={{ backgroundColor: "primary.light" }} />
+                                    : largestMag.properties.mag
+                                }
+                            </Typography>
+                        </CardContent>
                     </CardActionArea>
                 </DataCard>
             </Grid>
@@ -118,19 +143,19 @@ const DataCards = () => {
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
                     <CardActionArea onClick={() => handleDialogOpen("significant")}>
-                    <CardContent>
-                        <Typography variant="body2" color="primary.contrastText">
-                            Potential Damage
-                        </Typography>
-                        {loading 
-                        ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
-                        : <>
-                            <Typography variant="h5" color="primary.contrastText">
-                                { significant.length }
+                        <CardContent>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Potential Damage
                             </Typography>
-                        </>
-                        }
-                    </CardContent>
+                            {loading
+                                ? <Skeleton sx={{ backgroundColor: "primary.light" }} />
+                                : <>
+                                    <Typography variant="h5" color="primary.contrastText">
+                                        {significant.length}
+                                    </Typography>
+                                </>
+                            }
+                        </CardContent>
                     </CardActionArea>
                 </DataCard>
             </Grid>
@@ -138,19 +163,19 @@ const DataCards = () => {
             <Grid item xs={6} sm={3} lg={12}>
                 <DataCard>
                     <CardActionArea onClick={() => handleDialogOpen("tsunami")} values={tsunami}>
-                    <CardContent>
-                        <Typography variant="body2" color="primary.contrastText">
-                            Tsunami Potential
-                        </Typography>
-                        {loading 
-                        ? <Skeleton sx={{ backgroundColor: "primary.light" }}/>
-                        : <>
-                            <Typography variant="h5" color="primary.contrastText">
-                                { tsunami.length }
+                        <CardContent>
+                            <Typography variant="body2" color="primary.contrastText">
+                                Tsunami Potential
                             </Typography>
-                        </>
-                        }
-                    </CardContent>
+                            {loading
+                                ? <Skeleton sx={{ backgroundColor: "primary.light" }} />
+                                : <>
+                                    <Typography variant="h5" color="primary.contrastText">
+                                        {tsunami.length}
+                                    </Typography>
+                                </>
+                            }
+                        </CardContent>
                     </CardActionArea>
                 </DataCard>
             </Grid>

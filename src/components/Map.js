@@ -1,9 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import MarkerFactory from "./MarkerFactory";
-import getData from "../utils/USGSapi";
 import { SeismicDataContext } from "../Context";
 
+
+const Listener = () => {
+    const context = useContext(SeismicDataContext);
+    const map = useMap();
+
+    useEffect(() => {
+        context.setMap(map);
+    }, [context, map]);
+
+    return null;
+}
 
 export default function Map() {
     const context = useContext(SeismicDataContext);
@@ -20,7 +30,7 @@ export default function Map() {
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
             />
             <MarkerFactory data={data} />
-            
+            <Listener />
         </MapContainer>
     )
 }

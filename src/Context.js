@@ -11,6 +11,7 @@ export const SeismicDataProvider = ({ children }) => {
   const [seismicDataToday, setSeismicDataToday] = useState([]);
   const [seismicDataWeek, setSeismicDataWeek] = useState([]);
   const [seismicDataMonth, setSeismicDataMonth] = useState([]);
+  const [map, setMap] = useState(null);
 
   // Functions to update the seismic data
   const updateSeismicDataHour = (data) => {
@@ -40,6 +41,8 @@ export const SeismicDataProvider = ({ children }) => {
     updateSeismicDataWeek,
     seismicDataMonth,
     updateSeismicDataMonth,
+    map,
+    setMap
   };
 
   return (
