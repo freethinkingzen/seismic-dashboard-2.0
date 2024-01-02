@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
-    Box,
     Card,
     CardActionArea,
     CardContent,
@@ -12,7 +11,7 @@ import {
 import { SeismicDataContext } from '../Context';
 import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
 import LocationDialog from './LocationDialog';
-import { Popup } from 'react-leaflet';
+
 
 const DataCard = styled(Card)(({ theme }) => ({
     display: "flex",
