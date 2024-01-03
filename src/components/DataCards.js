@@ -3,6 +3,7 @@ import {
     Card,
     CardActionArea,
     CardContent,
+    Divider,
     Grid,
     Skeleton,
     styled,
@@ -95,14 +96,14 @@ const DataCards = () => {
     };
 
     return (
-        <Grid container spacing={1} sx={{ height: "100%", justifyContent: "center" }}>
-
-            <Grid item xs={12} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Typography variant="h5" color={"primary.contrastText"} sx={{ textAlign: "center" }}>
-                    Today at a Glance
-                </Typography>
-            </Grid>
-
+        <Grid container sx={{ height: { lg: "85vh"}}}>
+        <Grid item xs={12} mt={{xs: 0, lg: "1em"}} sx={{ border: "1px solid", borderRadius: "4px", borderColor: "primary.light" }}>
+            <Typography variant="h6" px="0.5em" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>
+                Today at a Glance
+            </Typography>
+            <Divider sx={{ backgroundColor: "primary.light" }} />
+        </Grid>
+        <Grid container item xs={12} spacing={"2px"} sx={{ height: "100%", justifyContent: "center" }}>
             <Grid item xs={6} sm={3} lg={12} sx={{ pointerEvents: "none" }}>
                 <DataCard>
                     <CardActionArea>
@@ -179,6 +180,7 @@ const DataCards = () => {
                 </DataCard>
             </Grid>
             {dialogValues && <LocationDialog values={dialogValues} selectedValue={selectedLocation} open={dialogOpen} onClose={handleDialogClose} />}
+        </Grid>
         </Grid>
     );
 };

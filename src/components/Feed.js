@@ -38,15 +38,15 @@ const FeedItem = ({ properties }) => {
     const color = colorSelector(magnitude);
 
   return (
-    <FeedItemContainer item container justifyContent={{xs: "space-between", sm: "center"}} my="1px" theme={theme}>
-        <Grid item xs={2} m="0.5em" order={{ xs: 1, sm: 0 }}>
+    <FeedItemContainer item container justifyContent={{xs: "space-between", sm: "center"}} theme={theme}>
+        <Grid item xs={2} md={12} m="0.5em" order={{ xs: 1, sm: 0 }} sx={{ display: "flex", justifyContent: "center" }}>
             <CircleCard elevation={24} sx={{ height: magnitude * 12, width: magnitude * 12, backgroundColor: color }}>
                 <CardContent>
                     <Typography variant="h5" color="black">{magnitude}</Typography>
                 </CardContent>
             </CircleCard>
         </Grid>
-        <Grid item xs={8} m="0.5em" order={{ xs: 0, sm: 1 }}>
+        <Grid item xs={8} md={12} m="0.5em" order={{ xs: 0, sm: 1 }}>
             <Typography variant="body2" color={"primary.contrastText"} >
                 {time}
             </Typography>
@@ -89,7 +89,7 @@ const Feed = () => {
                 <Typography variant="h6" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>Live Feed</Typography>
                 <Divider sx={{ backgroundColor: "primary.light" }} />
             </Grid>
-            <Grid container sx={{ maxHeight: "85vh", overflow:"scroll" }}>
+            <Grid container gap={"2px"} sx={{ maxHeight: "85vh", overflow:"scroll" }}>
                 {loading
                 ? <Skeleton sx={{ height: "85vh", width: "100%", backgroundColor: "primary.light" }} />
                 : <>
