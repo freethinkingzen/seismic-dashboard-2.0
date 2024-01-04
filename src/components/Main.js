@@ -12,6 +12,7 @@ import DataCards from "./DataCards";
 import { SeismicDataContext } from "../Context";
 import getData from "../utils/USGSapi";
 import Feed from "./Feed";
+import AlertBanner from "./AlertBanner";
 
 export default function Main() {
     const context = useContext(SeismicDataContext);
@@ -36,6 +37,7 @@ export default function Main() {
         <Box sx={{ height: '100vh', backgroundColor: "primary.dark" }}>
             <Stack>
                 <NavHeader />
+                <AlertBanner  />
                 <Grid container p="8px">
                     <Grid item xs={12} lg={2} order={{ xs: 0}} sx={{ backgroundColor: "primary.dark" }}>
                         <DataCards />

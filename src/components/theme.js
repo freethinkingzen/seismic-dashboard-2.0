@@ -25,12 +25,18 @@ const theme = createTheme({
         },
         error: {
             main: variables.errorMedium
+        },
+        transparent: {
+            main: variables.transparentWarning
         }
     },
     typography: {
         fontFamily: [
             "Arial Black",
         ].join(','),
+    },
+    extras: {
+        transparentWarning: variables.warningTransparent,
     }
 });
 

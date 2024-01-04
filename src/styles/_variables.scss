@@ -21,6 +21,7 @@ $infoDark: #00304c;
 $warningLight: #F0E442;
 $warningMedium: #E69F00;
 $warningDark: #E46500;
+$transparentWarning: rgba($warningLight, 0.2);
 
 // Error
 $errorMedium: #C72A44;
@@ -46,4 +47,5 @@ $purple: #AC2AC7;
     infoMedium: $infoMedium;
     infoDark: $infoDark;
     errorMedium: $errorMedium;
+    transparentWarning: $transparentWarning;
 }

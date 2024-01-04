@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { CircleMarker, LayerGroup, Popup } from 'react-leaflet';
-import { Box } from '@mui/material';
 import { colorSelector } from '../utils/DataParser';
 
 
