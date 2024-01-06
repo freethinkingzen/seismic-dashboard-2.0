@@ -7,8 +7,7 @@ import {
     Paper,
     Skeleton,
     styled,
-    Typography,
-    useTheme } from '@mui/material';
+    Typography} from '@mui/material';
 import { SeismicDataContext } from '../Context';
 import getData from '../utils/USGSapi';
 import { colorSelector } from '../utils/DataParser';
@@ -41,7 +40,6 @@ const FeedItemContainer = styled(Grid)(({theme}) => ({
 
 const FeedItem = ({item}) => {
     const context = useContext(SeismicDataContext);
-    const theme = useTheme();
     const magnitude = item.properties.mag.toFixed(1);
     const time = new Date(item.properties.time).toLocaleTimeString();
     const color = colorSelector(magnitude);

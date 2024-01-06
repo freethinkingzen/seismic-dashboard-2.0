@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Collapse, Grid, IconButton, Typography } from '@mui/material';
+import { Alert, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from '@mui/material/styles/styled';
 
