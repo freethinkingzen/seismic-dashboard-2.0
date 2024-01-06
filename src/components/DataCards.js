@@ -10,7 +10,11 @@ import {
     Typography
 } from '@mui/material';
 import { SeismicDataContext } from '../Context';
-import { largestMagnitude, significantQuakes, tsunamiPotential } from '../utils/DataParser';
+import { 
+    largestMagnitude,
+    popupHTML,
+    significantQuakes,
+    tsunamiPotential } from '../utils/DataParser';
 import LocationDialog from './LocationDialog';
 
 
@@ -31,17 +35,6 @@ const DataCard = styled(Card)(({ theme }) => ({
     },
 }));
 
-const popupHTML = (item) => {
-    console.log(item);
-    return `
-        <span><b>Magnitude ${item.properties.mag}</b></span>
-        <br />
-        <span>${new Date(item.properties.time).toLocaleDateString()}</span>
-        <br />
-        <span>${new Date(item.properties.time).toLocaleTimeString()}</span>
-        <br />
-        <span>${item.properties.place}</span>;`
-}
 const DataCards = () => {
     const context = useContext(SeismicDataContext);
     const [loading, setLoading] = useState(true);
@@ -80,7 +73,7 @@ const DataCards = () => {
                 break;
         }
         if (values.length === 1) {
-            context.map.flyTo([values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]], 11);
+            context.map.flyTo([values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]], 10);
             context.map.openPopup(popupHTML(values[0]), [values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]]);
         }
         else if (values.length > 1) {
@@ -98,7 +91,7 @@ const DataCards = () => {
     return (
         <Grid container sx={{ height: { lg: "85vh"}}}>
         <Grid item xs={12} mt={{xs: 0, lg: "1em"}} sx={{ border: "1px solid", borderRadius: "4px", borderColor: "primary.light" }}>
-            <Typography variant="h6" px="0.5em" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>
+            <Typography variant="body1" px="0.5em" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>
                 Today at a Glance
             </Typography>
             <Divider sx={{ backgroundColor: "primary.light" }} />

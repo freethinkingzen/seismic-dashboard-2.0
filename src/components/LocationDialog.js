@@ -11,6 +11,7 @@ import {
   Tooltip} from '@mui/material';
 import { GpsFixed } from '@mui/icons-material';
 import { SeismicDataContext } from '../Context';
+import { popupHTML } from '../utils/DataParser';
 
 function LocationDialog({ values, selectedValue, open, onClose }) {
   const context = useContext(SeismicDataContext);
@@ -18,6 +19,7 @@ function LocationDialog({ values, selectedValue, open, onClose }) {
   const handleLocationClick = (value) => {
     if (context.map) {
       context.map.flyTo([value.geometry.coordinates[1], value.geometry.coordinates[0]], 10);
+      context.map.openPopup(popupHTML(values[0]), [values[0].geometry.coordinates[1], values[0].geometry.coordinates[0]]);
     }
     onClose(value);
   };

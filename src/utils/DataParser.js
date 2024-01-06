@@ -51,3 +51,14 @@ export const colorSelector = (mag) => {
         return variables.purple;
     }
 }
+
+export const popupHTML = (item) => {
+    return `
+        <span><b>Magnitude ${item.properties.mag}</b></span>
+        <br />
+        <span>${new Date(item.properties.time).toLocaleDateString()}</span>
+        <br />
+        <span>${new Date(item.properties.time).toLocaleTimeString()}</span>
+        <br />
+        <span>${item.properties.place}</span>;`
+}
