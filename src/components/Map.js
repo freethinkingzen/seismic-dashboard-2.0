@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import MarkerFactory from "./MarkerFactory";
 import { SeismicDataContext } from "../Context";
@@ -16,12 +16,6 @@ const Listener = () => {
 }
 
 export default function Map() {
-    const context = useContext(SeismicDataContext);
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        setData(context.seismicDataToday);
-    }, [context]);
 
     return (
         <MapContainer center={[20,0]} zoom={2} minZoom={2} maxBounds={[[180,-225], [-180, 225]]}>
@@ -29,7 +23,7 @@ export default function Map() {
                 attribution= '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
             />
-            <MarkerFactory data={data} />
+            <MarkerFactory />
             <Listener />
         </MapContainer>
     )

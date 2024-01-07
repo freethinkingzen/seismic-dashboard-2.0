@@ -92,7 +92,7 @@ const DataCards = () => {
         <Grid container sx={{ height: { lg: "85vh"}}}>
         <Grid item xs={12} mt={{xs: 0, lg: "1em"}} sx={{ border: "1px solid", borderRadius: "4px", borderColor: "primary.light" }}>
             <Typography variant="body1" px="0.5em" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>
-                Today at a Glance
+                Today's Stats
             </Typography>
             <Divider sx={{ backgroundColor: "primary.light" }} />
         </Grid>

@@ -102,9 +102,24 @@ const Feed = () => {
     return (
         <>
             <Grid item mt="1em" sx={{ border: "1px solid", borderRadius: "4px", borderColor: "primary.light" }}>
-                <Typography variant="body1" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>Live Feed</Typography>
+                <Typography variant="body1" sx={{ color: "primary.contrastText", textAlign: "center", fontWeight: "bold" }}>
+                    Past Hour
+                </Typography>
                 <Divider sx={{ backgroundColor: "primary.light" }} />
             </Grid>
+            {data.length === 0 && !loading
+            ?
+            <FeedItemContainer sx={{ height: "85vh" }}>
+                <Grid item>
+                    <Typography variant="body1" sx={{ marginTop: "5em", color: "primary.contrastText", textAlign: "center", fontWeight: "bold", textDecoration: "underline" }}>
+                        NO DATA
+                    </Typography>
+                    <Typography variant="subtitle2" sx={{ margin: "1em", color: "primary.contrastText", textAlign: "center", fontStyle: "italic" }}>
+                        Relax! That's a good thing!
+                    </Typography>
+                </Grid>
+            </FeedItemContainer>
+            :
             <Grid container gap={"2px"} sx={{ maxHeight: "85vh", overflow:"scroll" }}>
                 {loading
                 ? <Skeleton sx={{ height: "85vh", width: "100%", backgroundColor: "primary.light" }} />
@@ -115,6 +130,7 @@ const Feed = () => {
                 </>
                 }
             </Grid>
+            }
         </>
     );
 };
