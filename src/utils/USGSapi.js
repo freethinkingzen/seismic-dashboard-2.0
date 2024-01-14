@@ -11,9 +11,9 @@ const endpoints = Object.freeze({
 });
 
 // Make the API call using Axios
-export default async function getData(length) {
+const getData = async (timeSpan) => {
     let endpoint;
-    switch (length) {
+    switch (timeSpan) {
         case 'day':
             endpoint = endpoints.day;
             break;
@@ -38,3 +38,5 @@ export default async function getData(length) {
         return [];
     }
 }
+
+export default getData;

@@ -38,6 +38,16 @@ export const tsunamiPotential = (data) => {
     return potential;
 }
 
+export const damageAlerts = (data) => {
+    let damage = [];
+    data.forEach((quake) => {
+        if (quake.properties.alert === "orange" || quake.properties.alert === "red") {
+            damage.push(quake);
+        }
+    });
+    return damage;
+}
+
 export const colorSelector = (mag) => {
     if (mag < 2) {
         return variables.warningLight;
