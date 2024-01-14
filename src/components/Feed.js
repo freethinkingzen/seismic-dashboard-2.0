@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import {
     CardActionArea,
     CardContent, 
@@ -38,7 +38,7 @@ const FeedItemContainer = styled(Grid)(({theme}) => ({
 }));
 
 
-const FeedItem = ({item}) => {
+const FeedItem = memo(function FeedItem({item})  {
     const context = useContext(SeismicDataContext);
     const magnitude = item.properties.mag.toFixed(1);
     const time = new Date(item.properties.time).toLocaleTimeString();
@@ -73,8 +73,7 @@ const FeedItem = ({item}) => {
         </FeedItemContainer>
         </CardActionArea>
     );
-};
-
+});
 
 const Feed = () => {
     const context = useContext(SeismicDataContext);

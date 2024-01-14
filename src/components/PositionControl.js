@@ -4,7 +4,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { GpsFixed } from '@mui/icons-material';
 import styled from '@emotion/styled';
 
-const StyledButton = styled(IconButton)(({theme}) => ({
+const StyledButton = styled(IconButton)(() => ({
     padding: "5px",
     backgroundColor: "white",
     color: "black",
@@ -24,10 +24,8 @@ function PositionControl() {
         const centerCoordinates = [center.lat, center.lng];
         const zoom = map.getZoom();
         if(centerCoordinates === defaultCenter && zoom === 2) {
-            console.log("Centered");
             return true;
         } else {
-            console.log(centerCoordinates, defaultCenter, zoom);
             return false;
         }
     }
