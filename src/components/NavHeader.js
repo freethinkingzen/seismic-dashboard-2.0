@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     AppBar,
     Box,
-    Link,
     Toolbar,
     Typography,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 
-const title = "Seismic Dashboard";
 
 export default function NavHeader () {
 
