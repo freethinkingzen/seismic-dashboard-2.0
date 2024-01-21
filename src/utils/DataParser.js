@@ -70,5 +70,8 @@ export const popupHTML = (item) => {
         <br />
         <span>${new Date(item.properties.time).toLocaleTimeString()}</span>
         <br />
-        <span>${item.properties.place}</span>;`
+        <span>${item.properties.place}</span>
+        <br />
+        <span><a href="https://www.google.com/search?q=${encodeURIComponent(item.properties.title)}" target="_blank" rel="noopener">Google Results</a></span>
+        <span><a href="${item.properties.url}" target="_blank" rel="noopener">USGS Info</a></span>`
 }

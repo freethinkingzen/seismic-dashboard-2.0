@@ -14,6 +14,7 @@ import { SeismicDataContext } from '../Context';
 import getData from '../utils/USGSapi';
 import { damageAlerts } from '../utils/DataParser';
 import { GpsFixed } from '@mui/icons-material';
+import { popupHTML } from '../utils/DataParser';
 
 
 const CustomAlert = styled(Alert)(({theme}) => ({
@@ -33,7 +34,7 @@ const AlertBanner = () => {
 
     useEffect(() => {
         if(!context.seismicDataSeismicDataMonth) {
-            getData("month").then((res) => {
+            getData("week").then((res) => {
                 context.updateSeismicDataMonth(res.features);
                 if(damageAlerts(res.features).length > 0) {
                     setData(damageAlerts(res.features));
@@ -47,6 +48,13 @@ const AlertBanner = () => {
             }
         }
     }, [context]);
+
+    const handleClick = (value) => {
+        if (context.map) {
+          context.map.flyTo([value.geometry.coordinates[1], value.geometry.coordinates[0]], 10);
+          context.map.openPopup(popupHTML(value), [value.geometry.coordinates[1], value.geometry.coordinates[0]]);
+        }
+      };
     
     return (
         <Collapse in={open}>
@@ -67,18 +75,21 @@ const AlertBanner = () => {
                 }
                 >
                     <AlertTitle>Damage Reported</AlertTitle>
-                    <Divider fullwidth sx={{ backgroundColor: "warning.main" }} />
                     <Stack>
                         {data && data.length > 0 && data.map((item) => (
                             <Stack key={item.id}>
+                                <Divider fullwidth sx={{ backgroundColor: "warning.main" }} />
                                 {new Date(item.properties.time).toLocaleDateString()} - {item.properties.title}
                                 <br />
                                 <span>
-                                    <Button variant="text" color="warning" startIcon={<GpsFixed />}>Map</Button>
-                                    <Link href="https://www.google.com" target="_blank" rel="noopener" underline="hover" sx={{marginLeft: "1em", color: "warning.main"}} >Google Results</Link>
-                                    <Link href="" target="_blank" rel="noopener" underline="hover" sx={{marginLeft: "1em", color: "warning.main"}} >USGS Info</Link>
+                                    <Button
+                                        variant="text"
+                                        color="warning"
+                                        startIcon={<GpsFixed />}
+                                        onClick={() => handleClick(item)}>Map</Button>
+                                    <Link href={`https://www.google.com/search?q=${encodeURIComponent(item.properties.title)}`} target="_blank" rel="noopener" underline="hover" sx={{marginLeft: "1em", color: "warning.main"}} >Google Results</Link>
+                                    <Link href={item.properties.url} target="_blank" rel="noopener" underline="hover" sx={{marginLeft: "1em", color: "warning.main"}} >USGS Info</Link>
                                 </span>
-                                <Divider fullwidth sx={{ backgroundColor: "warning.main" }} />
                             </Stack>
                         ))}
                     </Stack>

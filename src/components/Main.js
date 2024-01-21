@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { 
     Box,
     Grid,
+    Link,
     Stack,
+    Tooltip,
     Typography
 } from "@mui/material";
 import NavHeader from "./NavHeader";
@@ -13,6 +15,7 @@ import { SeismicDataContext } from "../Context";
 import getData from "../utils/USGSapi";
 import Feed from "./Feed";
 import AlertBanner from "./AlertBanner";
+import { AccountCircle, GitHub, LinkedIn } from "@mui/icons-material";
 
 export default function Main() {
     const context = useContext(SeismicDataContext);
@@ -50,10 +53,19 @@ export default function Main() {
                         <Map />
                     </Grid>
                 </Grid>
-                <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "primary.main" }}>
-                    <Typography variant="caption" sx={{ color: "primary.contrastText" }}>Created by <a href="https://github.com/freethinkingzen" target="_blank" rel="noreferrer">John Lewis </a></Typography>
-                    <Typography variant="caption" sx={{ color: "primary.contrastText" }}>&copy; 2023</Typography>
+                <Box gap="1em" sx={{ height: "3em", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", backgroundColor: "primary.main" }}>
+                    <Tooltip title="LinkedIn" placement="top">
+                        <Link href="https://www.linkedin.com/in/john-lewis-3b1b0b1b/" target="_blank" rel="noreferrer"><LinkedIn fontSize="large" sx={{ color: "primary.contrastText" }}/></Link>
+                    </Tooltip>
+                    <Tooltip title="GitHub" placement="top">
+                        <Link href="https://github.com/freethinkingzen" target="_blank" rel="noreferrer"><GitHub fontSize="large" sx={{ color: "primary.contrastText" }}/></Link>
+                    </Tooltip>
+                    <Tooltip title="Personal Site" placement="top">
+                        <Link href="https://www.johnlewiswebdev.com" target="_blank" rel="noreferrer"><AccountCircle fontSize="large" sx={{ color: "primary.contrastText" }}/></Link>
+                    </Tooltip>
+
                 </Box>
+                <Typography variant="caption" sx={{ color: "primary.contrastText", textAlign: "center" }}>John Lewis &copy; 2023</Typography>
             </Stack>
         </Box>
     )
